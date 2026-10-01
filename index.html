@@ -1,0 +1,2127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Archivo Histórico Digital · Sociedad Filarmónica de Gijón (1908–2026)</title>
+  <style>
+    :root {
+      --bg: #f8f6f1;
+      --surface: #ffffff;
+      --surface-alt: #f1ede4;
+      --border: #dcd5c7;
+      --text: #1f1d1a;
+      --text-muted: #5c564e;
+      --primary: #6b1d2f;
+      --primary-hover: #4e1320;
+      --primary-light: #f6ebee;
+      --accent: #8c6d3b;
+      --badge-bg: #ebe5d8;
+      --shadow: 0 2px 10px rgba(31, 29, 26, 0.07);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1, h2, h3, .serif {
+      font-family: "Georgia", "Times New Roman", Times, serif;
+    }
+
+    /* Cabecera institucional */
+    header {
+      background: linear-gradient(135deg, #2b1118 0%, #521624 60%, #6b1d2f 100%);
+      color: #fdfbf7;
+      padding: 1.75rem 1.5rem 1.25rem;
+      border-bottom: 4px solid var(--accent);
+    }
+
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .inst-subtitle {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.76rem;
+      color: #e3cfa8;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+
+    header h1 {
+      font-size: 1.85rem;
+      font-weight: normal;
+      letter-spacing: 0.01em;
+      margin-bottom: 0.35rem;
+    }
+
+    .header-desc {
+      font-size: 0.92rem;
+      color: #e6dfd5;
+      max-width: 780px;
+    }
+
+    .stats-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .stat-pill {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      color: #fff;
+    }
+
+    .stat-pill strong {
+      color: #f3d9a4;
+      font-weight: 700;
+    }
+
+    /* Navegación por pestañas de entidades */
+    .nav-tabs-wrap {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    .nav-tabs {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0.25rem;
+      padding: 0 1.5rem;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      padding: 0.95rem 1.15rem;
+      font-size: 0.94rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tab-btn:hover {
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    .tab-count {
+      background: var(--badge-bg);
+      color: var(--text);
+      font-size: 0.75rem;
+      padding: 0.1rem 0.45rem;
+      border-radius: 99px;
+      font-weight: 600;
+    }
+
+    .tab-btn.active .tab-count {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* Contenedor principal */
+    main {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.5rem;
+      flex: 1;
+    }
+
+    /* Panel de filtros */
+    .filter-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 1.25rem;
+    }
+
+    .filter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 0.9rem;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .filter-group label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+    }
+
+    .filter-group input,
+    .filter-group select {
+      padding: 0.55rem 0.7rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.9rem;
+      background: #fff;
+      color: var(--text);
+      width: 100%;
+    }
+
+    .filter-group input:focus,
+    .filter-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(107, 29, 47, 0.15);
+    }
+
+    .year-range {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .filter-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--surface-alt);
+    }
+
+    .quick-demos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      align-items: center;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.48rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-outline {
+      background: #fff;
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .btn-chip {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.28rem 0.65rem;
+      font-size: 0.78rem;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .btn-chip:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    /* Barra de resultados y paginación */
+    .results-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .pagination {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Tarjetas de conciertos */
+    .cards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .concert-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.12s, box-shadow 0.12s;
+      cursor: pointer;
+    }
+
+    .concert-card:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(31, 29, 26, 0.12);
+    }
+
+    .concert-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.55rem;
+    }
+
+    .concert-date-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .badges-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 4px;
+      background: var(--badge-bg);
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .badge-primary {
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid rgba(107, 29, 47, 0.2);
+    }
+
+    .concert-meta-line {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 0.55rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .concert-prog-preview {
+      font-size: 0.88rem;
+      color: var(--text);
+      background: var(--bg);
+      padding: 0.6rem 0.85rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    .concert-prog-preview ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .concert-prog-preview li {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Tablas de datos (Obras, Intérpretes, Espacios) */
+    .table-container {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    th {
+      background: var(--surface-alt);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.75rem 1rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    td {
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr.clickable-row {
+      cursor: pointer;
+      transition: background 0.12s;
+    }
+
+    tr.clickable-row:hover {
+      background: var(--primary-light);
+    }
+
+    .entity-link {
+      color: var(--primary);
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+      text-decoration-color: rgba(107, 29, 47, 0.3);
+    }
+
+    .entity-link:hover {
+      text-decoration-color: var(--primary);
+    }
+
+    /* Modal de ficha detallada */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 16, 14, 0.6);
+      display: none;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem 1rem;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 5px solid var(--primary);
+      border-radius: var(--radius);
+      max-width: 920px;
+      width: 100%;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      margin: auto 0;
+    }
+
+    .modal-header {
+      padding: 1.25rem 1.5rem;
+      background: var(--surface-alt);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .modal-header h2 {
+      font-size: 1.35rem;
+      color: var(--primary);
+    }
+
+    .close-btn {
+      background: none;
+      border: 1px solid var(--border);
+      background: #fff;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 1.15rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .close-btn:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.35rem;
+    }
+
+    .modal-section h3 {
+      font-size: 1rem;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.35rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem;
+      background: var(--bg);
+      padding: 0.9rem 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+
+    .meta-item span {
+      display: block;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .meta-item strong {
+      color: var(--text);
+    }
+
+    .source-box {
+      background: #f5f0e6;
+      border: 1px solid #d8ccb8;
+      border-left: 4px solid var(--accent);
+      padding: 1rem;
+      border-radius: 6px;
+      font-size: 0.88rem;
+    }
+
+    .obs-box {
+      background: var(--bg);
+      border-left: 3px solid var(--border);
+      padding: 0.65rem 0.9rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    footer {
+      background: var(--surface-alt);
+      border-top: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+
+    /* Pantalla de bloqueo por contraseña (Cifrado en cliente) */
+    .login-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #210c12 0%, #46121f 55%, #6b1d2f 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      z-index: 9999;
+    }
+
+    .login-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 5px solid var(--accent);
+      border-radius: var(--radius);
+      max-width: 440px;
+      width: 100%;
+      padding: 2.2rem 2rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+      text-align: center;
+    }
+
+    .login-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid rgba(107, 29, 47, 0.2);
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 0.85rem;
+    }
+
+    .login-card h2 {
+      color: var(--primary);
+      font-size: 1.45rem;
+      margin-bottom: 0.45rem;
+      font-weight: normal;
+    }
+
+    .login-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 1.35rem;
+    }
+
+    .login-input-wrap {
+      position: relative;
+      margin-bottom: 0.85rem;
+    }
+
+    .login-input-wrap input {
+      width: 100%;
+      padding: 0.7rem 2.6rem 0.7rem 0.9rem;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--text);
+      text-align: center;
+      letter-spacing: 0.06em;
+    }
+
+    .login-input-wrap input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(107, 29, 47, 0.15);
+    }
+
+    .toggle-pw-btn {
+      position: absolute;
+      right: 0.55rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text-muted);
+      padding: 0.25rem;
+    }
+
+    .login-error {
+      color: #b42318;
+      background: #fef3f2;
+      border: 1px solid #fecdca;
+      border-radius: 6px;
+      padding: 0.55rem 0.75rem;
+      font-size: 0.83rem;
+      margin-bottom: 0.85rem;
+      display: none;
+    }
+
+    .login-footer-note {
+      margin-top: 1.25rem;
+      padding-top: 0.95rem;
+      border-top: 1px solid var(--surface-alt);
+      font-size: 0.77rem;
+      color: var(--text-muted);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 640px) {
+      header h1 { font-size: 1.4rem; }
+      main { padding: 1rem; }
+      .modal-body { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PANTALLA DE ACCESO PROTEGIDO (DESCIFRADO EN NAVEGADOR) -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-card">
+      <span class="login-badge">🔒 Acceso Restringido · TFM</span>
+      <h2 class="serif">Sociedad Filarmónica de Gijón</h2>
+      <p>Archivo Histórico Digital de Programación Musical (1908–2026). Introduce la clave para desencriptar la base de datos.</p>
+      <form onsubmit="intentarDesbloqueo(event)">
+        <div class="login-input-wrap">
+          <input type="password" id="inputClaveWeb" placeholder="Clave de acceso..." autocomplete="current-password" required autofocus />
+          <button type="button" class="toggle-pw-btn" onclick="alternarVisibilidadClave()" title="Mostrar/ocultar clave">👁️</button>
+        </div>
+        <div class="login-error" id="loginErrorMsg">Clave de acceso incorrecta.</div>
+        <button type="submit" class="btn btn-primary" id="btnDesbloquear" style="width:100%;justify-content:center;padding:0.68rem 1rem;font-size:0.95rem">
+          Desbloquear archivo digital
+        </button>
+      </form>
+      <div class="login-footer-note">
+        Los datos permanecen cifrados (SHA-256 CTR) en <code>datos_sfg.js</code> y se desencriptan localmente en tu navegador.
+      </div>
+    </div>
+  </div>
+
+
+  <header>
+    <div class="header-inner">
+      <div class="header-top">
+        <div>
+          <div class="inst-subtitle">Sociedad Filarmónica de Gijón · Fundada en 1908</div>
+          <h1>Archivo Histórico Digital de Programación Musical</h1>
+          <p class="header-desc">
+            Catálogo relacional con granularidad de ítem de los conciertos, obras, compositores, intérpretes, agrupaciones y espacios documentados en el fondo histórico de la Sociedad.
+          </p>
+        </div>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+          <button class="btn btn-outline" style="background:rgba(255,255,255,0.12);color:#fff;border-color:rgba(255,255,255,0.3)" onclick="abrirConfigPdf()">
+            ⚙️ Ruta de PDFs
+          </button>
+          <button class="btn btn-outline" style="background:rgba(255,255,255,0.12);color:#fff;border-color:rgba(255,255,255,0.3)" onclick="bloquearSesion()" title="Cerrar sesión y volver a pedir contraseña">
+            🔒 Bloquear
+          </button>
+        </div>
+      </div>
+      <div class="stats-bar" id="headerStats"></div>
+    </div>
+  </header>
+
+  <div class="nav-tabs-wrap">
+    <nav class="nav-tabs">
+      <button class="tab-btn active" data-tab="conciertos" onclick="cambiarTab('conciertos')">
+        Conciertos <span class="tab-count" id="countConciertos">0</span>
+      </button>
+      <button class="tab-btn" data-tab="obras" onclick="cambiarTab('obras')">
+        Repertorio y Compositores <span class="tab-count" id="countObras">0</span>
+      </button>
+      <button class="tab-btn" data-tab="interpretes" onclick="cambiarTab('interpretes')">
+        Intérpretes y Agrupaciones <span class="tab-count" id="countInterpretes">0</span>
+      </button>
+      <button class="tab-btn" data-tab="lugares" onclick="cambiarTab('lugares')">
+        Espacios Históricos <span class="tab-count" id="countLugares">0</span>
+      </button>
+    </nav>
+  </div>
+
+  <main>
+    <!-- VISTA 1: CONCIERTOS -->
+    <section id="view-conciertos">
+      <div class="filter-panel">
+        <div class="filter-grid">
+          <div class="filter-group">
+            <label for="fTexto">Búsqueda general</label>
+            <input type="text" id="fTexto" placeholder="Obra, compositor, intérprete, nota..." oninput="resetPageAndFilterConciertos()" />
+          </div>
+          <div class="filter-group">
+            <label for="fTemporada">Temporada</label>
+            <select id="fTemporada" onchange="resetPageAndFilterConciertos()">
+              <option value="">Todas las temporadas (1908–2026)</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Intervalo de años</label>
+            <div class="year-range">
+              <input type="number" id="fAnoMin" placeholder="1908" min="1908" max="2026" oninput="resetPageAndFilterConciertos()" />
+              <span>–</span>
+              <input type="number" id="fAnoMax" placeholder="2026" min="1908" max="2026" oninput="resetPageAndFilterConciertos()" />
+            </div>
+          </div>
+          <div class="filter-group">
+            <label for="fLugar">Espacio / Sala</label>
+            <select id="fLugar" onchange="resetPageAndFilterConciertos()">
+              <option value="">Todos los espacios</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="fCompositor">Compositor programado</label>
+            <input type="text" id="fCompositor" list="dlCompositores" placeholder="Ej. Beethoven, Chopin, Ravel..." oninput="resetPageAndFilterConciertos()" />
+            <datalist id="dlCompositores"></datalist>
+          </div>
+          <div class="filter-group">
+            <label for="fInterprete">Intérprete o agrupación</label>
+            <input type="text" id="fInterprete" placeholder="Ej. Rubinstein, Doble Quinteto..." oninput="resetPageAndFilterConciertos()" />
+          </div>
+        </div>
+
+        <div class="filter-actions">
+          <div class="quick-demos">
+            <span>Consultas de ejemplo (Apdo. 7.7 TFM):</span>
+            <button class="btn-chip" onclick="abrirConcierto('C0001')">Inaugural (06/05/1908)</button>
+            <button class="btn-chip" onclick="abrirConcierto('C0089')">Concierto n.º 88: Arthur Rubinstein (29/02/1916)</button>
+            <button class="btn-chip" onclick="abrirConcierto('C0339')">Recital Regino Sáinz de la Maza (03/05/1938)</button>
+          </div>
+          <button class="btn btn-outline" onclick="limpiarFiltrosConciertos()">Limpiar filtros</button>
+        </div>
+      </div>
+
+      <div class="results-toolbar">
+        <div id="infoResultadosConciertos">Mostrando conciertos...</div>
+        <div class="pagination" id="paginacionConciertos"></div>
+      </div>
+
+      <div class="cards-list" id="listaConciertos"></div>
+    </section>
+
+    <!-- VISTA 2: REPERTORIO Y COMPOSITORES -->
+    <section id="view-obras" class="hidden">
+      <div class="filter-panel">
+        <div class="filter-grid">
+          <div class="filter-group">
+            <label for="fObraComp">Compositor</label>
+            <input type="text" id="fObraComp" list="dlCompositores" placeholder="Filtrar por autor..." oninput="resetPageAndFilterObras()" />
+          </div>
+          <div class="filter-group">
+            <label for="fObraTit">Título de la obra / Catálogo / Opus</label>
+            <input type="text" id="fObraTit" placeholder="Ej. Sonata, Appassionata, BWV, Op..." oninput="resetPageAndFilterObras()" />
+          </div>
+          <div class="filter-group">
+            <label for="fObraInst">Instrumentación</label>
+            <input type="text" id="fObraInst" placeholder="Ej. PIANO, VIOLIN, CUARTETO..." oninput="resetPageAndFilterObras()" />
+          </div>
+          <div class="filter-group">
+            <label for="fObraOrden">Ordenar repertorio por</label>
+            <select id="fObraOrden" onchange="resetPageAndFilterObras()">
+              <option value="freq_desc">Mayor frecuencia de interpretación (Apdo. 7.7.2)</option>
+              <option value="comp_asc">Compositor y título (A–Z)</option>
+              <option value="ano_asc">Año de composición (más antiguas primero)</option>
+              <option value="ano_desc">Año de composición (más recientes primero)</option>
+            </select>
+          </div>
+        </div>
+        <div class="filter-actions">
+          <div class="quick-demos">
+            <span>Filtro rápido:</span>
+            <button class="btn-chip" onclick="filtrarCompRapido('BEETHOVEN, LUDWIG VAN')">Beethoven</button>
+            <button class="btn-chip" onclick="filtrarCompRapido('CHOPIN, FREDERIC')">Chopin</button>
+            <button class="btn-chip" onclick="filtrarCompRapido('MOZART, WOLFGANG AMADEUS')">Mozart</button>
+            <button class="btn-chip" onclick="filtrarCompRapido('BACH, JOHANN SEBASTIAN')">J. S. Bach</button>
+            <button class="btn-chip" onclick="filtrarCompRapido('FALLA, MANUEL DE')">M. de Falla</button>
+          </div>
+          <button class="btn btn-outline" onclick="limpiarFiltrosObras()">Limpiar filtros</button>
+        </div>
+      </div>
+
+      <div class="results-toolbar">
+        <div id="infoResultadosObras"></div>
+        <div class="pagination" id="paginacionObras"></div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Compositor</th>
+              <th>Título normalizado de la obra</th>
+              <th>Catálogo / Año</th>
+              <th>Instrumentación</th>
+              <th>Interpretaciones en la SFG</th>
+              <th>Período (1.ª – última)</th>
+            </tr>
+          </thead>
+          <tbody id="tablaObrasBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- VISTA 3: INTÉRPRETES Y AGRUPACIONES -->
+    <section id="view-interpretes" class="hidden">
+      <div class="filter-panel">
+        <div class="filter-grid">
+          <div class="filter-group">
+            <label for="fIntTipoEntidad">Tipo de agente</label>
+            <select id="fIntTipoEntidad" onchange="resetPageAndFilterInterpretes()">
+              <option value="todos">Personas y Agrupaciones (Ensembles)</option>
+              <option value="persona">Solo Personas individuales (05_PERSONAS)</option>
+              <option value="ensemble">Solo Agrupaciones / Ensembles (06_ENSEMBLES)</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="fIntNombre">Nombre del intérprete o agrupación</label>
+            <input type="text" id="fIntNombre" placeholder="Ej. Rubinstein, Casals, Cuarteto..." oninput="resetPageAndFilterInterpretes()" />
+          </div>
+          <div class="filter-group">
+            <label for="fIntInst">Instrumento / Rol / País</label>
+            <input type="text" id="fIntInst" placeholder="Ej. PIANO, DIRECTOR, VIOLONCHELO..." oninput="resetPageAndFilterInterpretes()" />
+          </div>
+          <div class="filter-group">
+            <label for="fIntOrden">Ordenar por</label>
+            <select id="fIntOrden" onchange="resetPageAndFilterInterpretes()">
+              <option value="conc_desc">Mayor número de conciertos en la SFG (Apdo. 7.7.7)</option>
+              <option value="nom_asc">Nombre normalizado (A–Z)</option>
+            </select>
+          </div>
+        </div>
+        <div class="filter-actions">
+          <div></div>
+          <button class="btn btn-outline" onclick="limpiarFiltrosInterpretes()">Limpiar filtros</button>
+        </div>
+      </div>
+
+      <div class="results-toolbar">
+        <div id="infoResultadosInterpretes"></div>
+        <div class="pagination" id="paginacionInterpretes"></div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tipo</th>
+              <th>Nombre normalizado</th>
+              <th>Instrumento / Especialidad</th>
+              <th>Conciertos en la SFG</th>
+              <th>Intervalo de actuaciones</th>
+            </tr>
+          </thead>
+          <tbody id="tablaInterpretesBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- VISTA 4: ESPACIOS HISTÓRICOS -->
+    <section id="view-lugares" class="hidden">
+      <div class="filter-panel">
+        <p style="font-size:0.92rem;color:var(--text-muted)">
+          <strong>Criterio de identificación espacial (Apartado 7.3.4):</strong> Cada registro identifica un edificio físico diferenciando la <em>denominación histórica normalizada de la época</em> de la <em>denominación actual de referencia</em>, evitando fundir edificios distintos que compartieron nombre (como el antiguo Teatro Jovellanos de 1912–1933 y el Teatro Dindurra, actual Teatro Jovellanos). Haz clic en cualquier espacio para consultar los conciertos celebrados en él.
+        </p>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Denominación en la época (Normalizada)</th>
+              <th>Edificio / Referencia actual</th>
+              <th>1.ª mención literal</th>
+              <th>Período documentado</th>
+              <th>Conciertos</th>
+              <th>Observaciones históricas</th>
+            </tr>
+          </thead>
+          <tbody id="tablaLugaresBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL UNIVERSAL DE FICHA DETALLADA -->
+  <div class="modal-backdrop" id="modalBackdrop" onclick="cerrarModalSiFondo(event)">
+    <div class="modal-card" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <div>
+          <div class="inst-subtitle" id="modalSubtitulo" style="color:var(--primary)">FICHA DEL ARCHIVO</div>
+          <h2 id="modalTitulo">Detalle</h2>
+        </div>
+        <button class="close-btn" onclick="cerrarModal()" title="Cerrar (Esc)">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <footer>
+    Archivo Histórico Digital de la Sociedad Filarmónica de Gijón · Modelo relacional de granularidad de ítem (TFM Aida Suárez Fernández, 2026)
+  </footer>
+
+  <!-- Carga directa de datos generados por migracion_sfg.py (Funciona en local sin servidor y en GitHub Pages) -->
+  <script src="datos_sfg.js"></script>
+  <script>
+    // Estado global e índices relacionales en memoria
+    let DB = window.SFG_DATA || { lugares: [], conciertos: [], fuentes: [], obras: [], obras_conc: [], personas: [], ensembles: [], participacion: [] };
+    let carpetaPdfs = localStorage.getItem("sfg_pdf_folder") || "programas_pdf/";
+
+    /* ==================== MOTOR CRIPTOGRÁFICO SHA-256 CTR + DEFLATE ==================== */
+    const SHA256_K = new Uint32Array([
+      0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+      0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+      0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+      0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+      0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+      0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+      0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+      0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
+    ]);
+
+    function sha256Bytes(msgBytes) {
+      const l = msgBytes.length;
+      const bitLenHi = Math.floor((l * 8) / 0x100000000);
+      const bitLenLo = (l * 8) >>> 0;
+      const padLen = ((l + 9 + 63) & ~63);
+      const padded = new Uint8Array(padLen);
+      padded.set(msgBytes);
+      padded[l] = 0x80;
+      const view = new DataView(padded.buffer);
+      view.setUint32(padLen - 8, bitLenHi, false);
+      view.setUint32(padLen - 4, bitLenLo, false);
+
+      let h0 = 0x6a09e667, h1 = 0xbb67ae85, h2 = 0x3c6ef372, h3 = 0xa54ff53a;
+      let h4 = 0x510e527f, h5 = 0x9b05688c, h6 = 0x1f83d9ab, h7 = 0x5be0cd19;
+      const w = new Uint32Array(64);
+
+      for (let offset = 0; offset < padLen; offset += 64) {
+        for (let i = 0; i < 16; i++) {
+          w[i] = view.getUint32(offset + i * 4, false);
+        }
+        for (let i = 16; i < 64; i++) {
+          const v15 = w[i - 15];
+          const s0 = ((v15 >>> 7) | (v15 << 25)) ^ ((v15 >>> 18) | (v15 << 14)) ^ (v15 >>> 3);
+          const v2 = w[i - 2];
+          const s1 = ((v2 >>> 17) | (v2 << 15)) ^ ((v2 >>> 19) | (v2 << 13)) ^ (v2 >>> 10);
+          w[i] = (w[i - 16] + s0 + w[i - 7] + s1) >>> 0;
+        }
+        let a = h0, b = h1, c = h2, d = h3, e = h4, f = h5, g = h6, h = h7;
+        for (let i = 0; i < 64; i++) {
+          const S1 = ((e >>> 6) | (e << 26)) ^ ((e >>> 11) | (e << 21)) ^ ((e >>> 25) | (e << 7));
+          const ch = (e & f) ^ (~e & g);
+          const temp1 = (h + S1 + ch + SHA256_K[i] + w[i]) >>> 0;
+          const S0 = ((a >>> 2) | (a << 30)) ^ ((a >>> 13) | (a << 19)) ^ ((a >>> 22) | (a << 10));
+          const maj = (a & b) ^ (a & c) ^ (b & c);
+          const temp2 = (S0 + maj) >>> 0;
+          h = g; g = f; f = e;
+          e = (d + temp1) >>> 0;
+          d = c; c = b; b = a;
+          a = (temp1 + temp2) >>> 0;
+        }
+        h0 = (h0 + a) >>> 0; h1 = (h1 + b) >>> 0; h2 = (h2 + c) >>> 0; h3 = (h3 + d) >>> 0;
+        h4 = (h4 + e) >>> 0; h5 = (h5 + f) >>> 0; h6 = (h6 + g) >>> 0; h7 = (h7 + h) >>> 0;
+      }
+
+      const out = new Uint8Array(32);
+      const outView = new DataView(out.buffer);
+      outView.setUint32(0, h0, false); outView.setUint32(4, h1, false);
+      outView.setUint32(8, h2, false); outView.setUint32(12, h3, false);
+      outView.setUint32(16, h4, false); outView.setUint32(20, h5, false);
+      outView.setUint32(24, h6, false); outView.setUint32(28, h7, false);
+      return out;
+    }
+
+    function b64ToBytes(b64) {
+      const bin = atob(b64);
+      const len = bin.length;
+      const bytes = new Uint8Array(len);
+      for (let i = 0; i < len; i++) bytes[i] = bin.charCodeAt(i);
+      return bytes;
+    }
+
+    function bytesToHex(bytes) {
+      return Array.from(bytes).map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    function concatBytes(...arrays) {
+      const total = arrays.reduce((acc, a) => acc + a.length, 0);
+      const res = new Uint8Array(total);
+      let offset = 0;
+      for (const a of arrays) {
+        res.set(a, offset);
+        offset += a.length;
+      }
+      return res;
+    }
+
+    async function descomprimirZlib(compBytes) {
+      const ds = new DecompressionStream("deflate");
+      const writer = ds.writable.getWriter();
+      writer.write(compBytes);
+      writer.close();
+      const resp = new Response(ds.readable);
+      const arrayBuffer = await resp.arrayBuffer();
+      return new TextDecoder("utf-8").decode(arrayBuffer);
+    }
+
+    async function desencriptarArchivo(password) {
+      const enc = window.SFG_ENCRYPTED;
+      if (!enc) throw new Error("No se encontró el paquete cifrado en datos_sfg.js");
+
+      const salt = b64ToBytes(enc.salt);
+      const nonce = b64ToBytes(enc.nonce);
+      const pwBytes = new TextEncoder().encode(password);
+      const rounds = enc.rounds || 2000;
+
+      let key = sha256Bytes(concatBytes(pwBytes, salt));
+      const suffix = concatBytes(pwBytes, salt);
+      for (let r = 1; r < rounds; r++) {
+        key = sha256Bytes(concatBytes(key, suffix));
+      }
+
+      const verifTag = bytesToHex(sha256Bytes(concatBytes(key, new TextEncoder().encode("SFG_VERIF")))).slice(0, 32);
+      if (verifTag !== enc.verif) {
+        return null; // Contraseña incorrecta
+      }
+
+      const cipherBytes = b64ToBytes(enc.data);
+      const cLen = enc.len || cipherBytes.length;
+      const nBlocks = Math.ceil(cLen / 32);
+      const plainComp = new Uint8Array(cLen);
+
+      const blockInput = new Uint8Array(32 + 16 + 4);
+      blockInput.set(key, 0);
+      blockInput.set(nonce, 32);
+      const counterView = new DataView(blockInput.buffer, 48, 4);
+
+      for (let i = 0; i < nBlocks; i++) {
+        counterView.setUint32(0, i, true); // little-endian uint32
+        const ksBlock = sha256Bytes(blockInput);
+        const baseOffset = i * 32;
+        const limit = Math.min(32, cLen - baseOffset);
+        for (let j = 0; j < limit; j++) {
+          plainComp[baseOffset + j] = cipherBytes[baseOffset + j] ^ ksBlock[j];
+        }
+      }
+
+      const jsonStr = await descomprimirZlib(plainComp);
+      return JSON.parse(jsonStr);
+    }
+
+    function alternarVisibilidadClave() {
+      const inp = document.getElementById("inputClaveWeb");
+      inp.type = inp.type === "password" ? "text" : "password";
+    }
+
+    async function intentarDesbloqueo(e) {
+      if (e) e.preventDefault();
+      const inp = document.getElementById("inputClaveWeb");
+      const errEl = document.getElementById("loginErrorMsg");
+      const btn = document.getElementById("btnDesbloquear");
+      const clave = inp.value.trim();
+
+      errEl.style.display = "none";
+      btn.disabled = true;
+      btn.textContent = "Desencriptando base de datos...";
+
+      await new Promise(r => setTimeout(r, 20));
+
+      try {
+        const datos = await desencriptarArchivo(clave);
+        if (!datos) {
+          errEl.textContent = "Clave de acceso incorrecta. Verifica mayúsculas y minúsculas.";
+          errEl.style.display = "block";
+          btn.disabled = false;
+          btn.textContent = "Desbloquear archivo digital";
+          inp.select();
+          return;
+        }
+        DB = datos;
+        sessionStorage.setItem("sfg_session_key", clave);
+        document.getElementById("loginOverlay").classList.add("hidden");
+        inicializarIndices();
+      } catch (err) {
+        errEl.textContent = "Error al desencriptar los datos: " + err.message;
+        errEl.style.display = "block";
+        btn.disabled = false;
+        btn.textContent = "Desbloquear archivo digital";
+      }
+    }
+
+    function bloquearSesion() {
+      sessionStorage.removeItem("sfg_session_key");
+      window.location.reload();
+    }
+
+    const mapLugares = new Map();
+    const mapConciertos = new Map();
+    const mapObras = new Map();
+    const mapPersonas = new Map();
+    const mapEnsembles = new Map();
+    const fuentesPorConcierto = new Map();
+    const obrasPorConcierto = new Map();
+    const conciertosPorObra = new Map();
+    const partPorConcierto = new Map();
+    const conciertosPorPersona = new Map();
+    const conciertosPorEnsemble = new Map();
+    const conciertosPorLugar = new Map();
+
+    // Estado de paginación
+    const PAGE_SIZE = 25;
+    let pageConciertos = 1;
+    let pageObras = 1;
+    let pageInterpretes = 1;
+
+    let listaConciertosFiltrados = [];
+    let listaObrasFiltradas = [];
+    let listaInterpretesFiltrados = [];
+    let catalogoAgentes = [];
+
+    function normalizarTexto(str) {
+      if (!str) return "";
+      return String(str)
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase();
+    }
+
+    function formatearFecha(iso) {
+      if (!iso) return "Fecha sin determinar";
+      const partes = String(iso).split("-");
+      if (partes.length !== 3) return iso;
+      return `${partes[2]}/${partes[1]}/${partes[0]}`;
+    }
+
+    function construirUrlPdf(archivoPdf, paginasStr) {
+      if (!archivoPdf) return null;
+      let base = carpetaPdfs.trim();
+      if (base && !base.endsWith("/")) base += "/";
+      let url = base + encodeURIComponent(archivoPdf);
+      if (paginasStr) {
+        const match = String(paginasStr).match(/(\d+)/);
+        if (match) {
+          url += `#page=${match[1]}`;
+        }
+      }
+      return url;
+    }
+
+    function inicializarIndices() {
+      DB.lugares.forEach(l => {
+        mapLugares.set(l.id, l);
+        conciertosPorLugar.set(l.id, []);
+      });
+
+      DB.obras.forEach(o => {
+        o._search = normalizarTexto(`${o.comp} ${o.tit} ${o.op || ""} ${o.cat || ""} ${o.inst || ""}`);
+        mapObras.set(o.id, o);
+        conciertosPorObra.set(o.id, []);
+      });
+
+      DB.personas.forEach(p => {
+        mapPersonas.set(p.id, p);
+        conciertosPorPersona.set(p.id, []);
+      });
+
+      DB.ensembles.forEach(e => {
+        mapEnsembles.set(e.id, e);
+        conciertosPorEnsemble.set(e.id, []);
+      });
+
+      DB.fuentes.forEach(f => {
+        if (!fuentesPorConcierto.has(f.c)) fuentesPorConcierto.set(f.c, []);
+        fuentesPorConcierto.get(f.c).push(f);
+      });
+
+      DB.obras_conc.forEach(([idConc, idObra, orden]) => {
+        if (!obrasPorConcierto.has(idConc)) obrasPorConcierto.set(idConc, []);
+        obrasPorConcierto.get(idConc).push({ idObra, orden, obra: mapObras.get(idObra) });
+        if (conciertosPorObra.has(idObra)) {
+          conciertosPorObra.get(idObra).push({ idConc, orden });
+        }
+      });
+
+      DB.participacion.forEach(([idConc, idPers, rol, idEns]) => {
+        if (!partPorConcierto.has(idConc)) partPorConcierto.set(idConc, []);
+        partPorConcierto.get(idConc).push({
+          idPers,
+          rol,
+          idEns,
+          persona: idPers ? mapPersonas.get(idPers) : null,
+          ensemble: idEns ? mapEnsembles.get(idEns) : null
+        });
+
+        if (idPers && conciertosPorPersona.has(idPers)) {
+          conciertosPorPersona.get(idPers).push({ idConc, rol, idEns });
+        }
+        if (idEns && conciertosPorEnsemble.has(idEns)) {
+          const arr = conciertosPorEnsemble.get(idEns);
+          if (!arr.some(x => x.idConc === idConc)) {
+            arr.push({ idConc, rol });
+          }
+        }
+      });
+
+      DB.conciertos.forEach(c => {
+        mapConciertos.set(c.id, c);
+        if (c.l && conciertosPorLugar.has(c.l)) {
+          conciertosPorLugar.get(c.l).push(c);
+        }
+
+        const obrasList = obrasPorConcierto.get(c.id) || [];
+        const partList = partPorConcierto.get(c.id) || [];
+        const lugarObj = c.l ? mapLugares.get(c.l) : null;
+
+        const strObras = obrasList.map(x => x.obra ? `${x.obra.comp} ${x.obra.tit}` : "").join(" ");
+        const strComps = obrasList.map(x => x.obra ? x.obra.comp : "").join(" | ");
+        const strPart = partList.map(x => {
+          const pn = x.persona ? x.persona.n : "";
+          const en = x.ensemble ? x.ensemble.n : "";
+          return `${pn} ${en} ${x.rol || ""}`;
+        }).join(" ");
+
+        c._year = c.f ? parseInt(String(c.f).slice(0, 4), 10) : null;
+        c._searchComps = normalizarTexto(strComps);
+        c._searchPart = normalizarTexto(strPart);
+        c._searchAll = normalizarTexto(
+          `${c.id} ${c.f || ""} ${c.temp || ""} ${c.num || ""} ${lugarObj ? lugarObj.norm + " " + lugarObj.ref : ""} ${strObras} ${strPart} ${c.obs || ""}`
+        );
+      });
+
+      // Preparar métricas agregadas de obras
+      DB.obras.forEach(o => {
+        const apariciones = conciertosPorObra.get(o.id) || [];
+        o._freq = apariciones.length;
+        const fechas = apariciones
+          .map(a => mapConciertos.get(a.idConc)?.f)
+          .filter(Boolean)
+          .sort();
+        o._primeraFecha = fechas.length ? fechas[0] : null;
+        o._ultimaFecha = fechas.length ? fechas[fechas.length - 1] : null;
+      });
+
+      // Preparar catálogo unificado de personas y agrupaciones
+      catalogoAgentes = [];
+      DB.personas.forEach(p => {
+        const concs = conciertosPorPersona.get(p.id) || [];
+        const idsUnicos = [...new Set(concs.map(x => x.idConc))];
+        const fechas = idsUnicos.map(id => mapConciertos.get(id)?.f).filter(Boolean).sort();
+        catalogoAgentes.push({
+          id: p.id,
+          clase: "persona",
+          etiquetaClase: "Persona",
+          nombre: p.n,
+          info: [p.instrumento || p.inst, p.tipo].filter(Boolean).join(" · ") || "Intérprete",
+          numConciertos: idsUnicos.length,
+          primera: fechas[0] || null,
+          ultima: fechas[fechas.length - 1] || null,
+          _searchNombre: normalizarTexto(p.n),
+          _searchInfo: normalizarTexto(`${p.inst || ""} ${p.tipo || ""}`)
+        });
+      });
+
+      DB.ensembles.forEach(e => {
+        const concs = conciertosPorEnsemble.get(e.id) || [];
+        const idsUnicos = [...new Set(concs.map(x => x.idConc))];
+        const fechas = idsUnicos.map(id => mapConciertos.get(id)?.f).filter(Boolean).sort();
+        catalogoAgentes.push({
+          id: e.id,
+          clase: "ensemble",
+          etiquetaClase: "Agrupación",
+          nombre: e.n,
+          info: e.pais ? `Ensemble (${e.pais})` : "Ensemble / Agrupación",
+          numConciertos: idsUnicos.length,
+          primera: fechas[0] || null,
+          ultima: fechas[fechas.length - 1] || null,
+          _searchNombre: normalizarTexto(e.n),
+          _searchInfo: normalizarTexto(`ensemble agrupacion ${e.pais || ""}`)
+        });
+      });
+
+      poblarControlesCabeceraYFiltros();
+      filtrarConciertos();
+      filtrarObras();
+      filtrarInterpretes();
+      renderizarTablaLugares();
+    }
+
+    function poblarControlesCabeceraYFiltros() {
+      const compositoresUnicos = [...new Set(DB.obras.map(o => o.comp).filter(Boolean))].sort();
+      document.getElementById("headerStats").innerHTML = `
+        <div class="stat-pill"><strong>${DB.conciertos.length.toLocaleString("es-ES")}</strong> conciertos</div>
+        <div class="stat-pill"><strong>${DB.obras_conc.length.toLocaleString("es-ES")}</strong> interpretaciones</div>
+        <div class="stat-pill"><strong>${DB.obras.length.toLocaleString("es-ES")}</strong> obras catalogadas</div>
+        <div class="stat-pill"><strong>${compositoresUnicos.length.toLocaleString("es-ES")}</strong> compositores</div>
+        <div class="stat-pill"><strong>${DB.personas.length.toLocaleString("es-ES")}</strong> intérpretes individuales</div>
+        <div class="stat-pill"><strong>${DB.ensembles.length.toLocaleString("es-ES")}</strong> agrupaciones</div>
+        <div class="stat-pill"><strong>${DB.lugares.length}</strong> espacios históricos</div>
+      `;
+
+      document.getElementById("countConciertos").textContent = DB.conciertos.length;
+      document.getElementById("countObras").textContent = DB.obras.length;
+      document.getElementById("countInterpretes").textContent = DB.personas.length + DB.ensembles.length;
+      document.getElementById("countLugares").textContent = DB.lugares.length;
+
+      // Temporadas
+      const temporadas = [...new Set(DB.conciertos.map(c => c.temp).filter(Boolean))].sort();
+      const selTemp = document.getElementById("fTemporada");
+      temporadas.forEach(t => {
+        const opt = document.createElement("option");
+        opt.value = t;
+        opt.textContent = `Temporada ${t}`;
+        selTemp.appendChild(opt);
+      });
+
+      // Lugares
+      const selLugar = document.getElementById("fLugar");
+      DB.lugares.forEach(l => {
+        const nConc = (conciertosPorLugar.get(l.id) || []).length;
+        const opt = document.createElement("option");
+        opt.value = l.id;
+        opt.textContent = `${l.norm} — [${l.ref}] (${nConc})`;
+        selLugar.appendChild(opt);
+      });
+
+      // Datalist de compositores
+      const dlComp = document.getElementById("dlCompositores");
+      compositoresUnicos.forEach(c => {
+        const opt = document.createElement("option");
+        opt.value = c;
+        dlComp.appendChild(opt);
+      });
+    }
+
+    function cambiarTab(tabId) {
+      document.querySelectorAll(".tab-btn").forEach(b => {
+        b.classList.toggle("active", b.dataset.tab === tabId);
+      });
+      ["conciertos", "obras", "interpretes", "lugares"].forEach(id => {
+        document.getElementById(`view-${id}`).classList.toggle("hidden", id !== tabId);
+      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    /* ==================== VISTA 1: CONCIERTOS ==================== */
+    function resetPageAndFilterConciertos() {
+      pageConciertos = 1;
+      filtrarConciertos();
+    }
+
+    function limpiarFiltrosConciertos() {
+      document.getElementById("fTexto").value = "";
+      document.getElementById("fTemporada").value = "";
+      document.getElementById("fAnoMin").value = "";
+      document.getElementById("fAnoMax").value = "";
+      document.getElementById("fLugar").value = "";
+      document.getElementById("fCompositor").value = "";
+      document.getElementById("fInterprete").value = "";
+      resetPageAndFilterConciertos();
+    }
+
+    function filtrarConciertos() {
+      const qTexto = normalizarTexto(document.getElementById("fTexto").value);
+      const qTemp = document.getElementById("fTemporada").value;
+      const anoMin = parseInt(document.getElementById("fAnoMin").value, 10) || null;
+      const anoMax = parseInt(document.getElementById("fAnoMax").value, 10) || null;
+      const qLugar = document.getElementById("fLugar").value;
+      const qComp = normalizarTexto(document.getElementById("fCompositor").value);
+      const qInt = normalizarTexto(document.getElementById("fInterprete").value);
+
+      listaConciertosFiltrados = DB.conciertos.filter(c => {
+        if (qTemp && c.temp !== qTemp) return false;
+        if (qLugar && c.l !== qLugar) return false;
+        if (anoMin && (!c._year || c._year < anoMin)) return false;
+        if (anoMax && (!c._year || c._year > anoMax)) return false;
+        if (qComp && !c._searchComps.includes(qComp)) return false;
+        if (qInt && !c._searchPart.includes(qInt)) return false;
+        if (qTexto && !c._searchAll.includes(qTexto)) return false;
+        return true;
+      });
+
+      renderizarListaConciertos();
+    }
+
+    function renderizarListaConciertos() {
+      const total = listaConciertosFiltrados.length;
+      const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+      if (pageConciertos > totalPages) pageConciertos = totalPages;
+
+      const start = (pageConciertos - 1) * PAGE_SIZE;
+      const slice = listaConciertosFiltrados.slice(start, start + PAGE_SIZE);
+
+      document.getElementById("infoResultadosConciertos").innerHTML =
+        `Mostrando <strong>${total ? start + 1 : 0}–${Math.min(start + PAGE_SIZE, total)}</strong> de <strong>${total.toLocaleString("es-ES")}</strong> conciertos encontrados`;
+
+      renderizarControlesPaginacion("paginacionConciertos", pageConciertos, totalPages, nuevaPag => {
+        pageConciertos = nuevaPag;
+        renderizarListaConciertos();
+        window.scrollTo({ top: 180, behavior: "smooth" });
+      });
+
+      const cont = document.getElementById("listaConciertos");
+      if (!slice.length) {
+        cont.innerHTML = `<div class="filter-panel" style="text-align:center;color:var(--text-muted)">No se han encontrado conciertos con los criterios seleccionados.</div>`;
+        return;
+      }
+
+      cont.innerHTML = slice.map(c => {
+        const lugar = c.l ? mapLugares.get(c.l) : null;
+        const obras = obrasPorConcierto.get(c.id) || [];
+        const parts = partPorConcierto.get(c.id) || [];
+
+        // Resumen de intérpretes sin duplicar ensemble
+        const nombresInt = [];
+        parts.forEach(p => {
+          if (p.ensemble && !nombresInt.includes(p.ensemble.n)) nombresInt.push(p.ensemble.n);
+          if (p.persona) {
+            const etq = p.rol ? `${p.persona.n} (${p.rol})` : p.persona.n;
+            if (!nombresInt.includes(etq)) nombresInt.push(etq);
+          }
+        });
+
+        const previewObras = obras.slice(0, 4).map(item => {
+          const o = item.obra;
+          if (!o) return "";
+          return `<li><strong>${item.orden}. ${o.comp}:</strong> ${o.tit}</li>`;
+        }).join("");
+
+        const masObras = obras.length > 4 ? `<li style="color:var(--text-muted);font-style:italic">+ ${obras.length - 4} obras más en el programa...</li>` : "";
+
+        return `
+          <article class="concert-card" onclick="abrirConcierto('${c.id}')">
+            <div class="concert-card-header">
+              <div class="concert-date-title serif">
+                ${formatearFecha(c.f)} ${c.h ? `· ${c.h} h` : ""}
+              </div>
+              <div class="badges-row">
+                <span class="badge badge-primary">${c.id}</span>
+                ${c.num ? `<span class="badge">Concierto n.º ${c.num}</span>` : ""}
+                <span class="badge">Temporada ${c.temp}</span>
+                ${c.ano ? `<span class="badge">Año ${c.ano}</span>` : ""}
+                ${c.serie ? `<span class="badge">Serie ${c.serie}</span>` : ""}
+              </div>
+            </div>
+            <div class="concert-meta-line">
+              <span>📍 <strong>Espacio:</strong> ${lugar ? `${lugar.norm} <small>(${lugar.ref})</small>` : "Sin especificar"}</span>
+              <span>🎻 <strong>Intérpretes:</strong> ${nombresInt.length ? nombresInt.slice(0, 4).join(" · ") + (nombresInt.length > 4 ? " …" : "") : "Ver ficha"}</span>
+            </div>
+            ${obras.length ? `
+              <div class="concert-prog-preview">
+                <ul>${previewObras}${masObras}</ul>
+              </div>
+            ` : `<div style="font-size:0.84rem;color:var(--text-muted);font-style:italic">Programa sin obras desglosadas o en proceso de vaciado.</div>`}
+          </article>
+        `;
+      }).join("");
+    }
+
+    /* ==================== VISTA 2: OBRAS Y COMPOSITORES ==================== */
+    function resetPageAndFilterObras() {
+      pageObras = 1;
+      filtrarObras();
+    }
+
+    function filtrarCompRapido(comp) {
+      document.getElementById("fObraComp").value = comp;
+      resetPageAndFilterObras();
+    }
+
+    function limpiarFiltrosObras() {
+      document.getElementById("fObraComp").value = "";
+      document.getElementById("fObraTit").value = "";
+      document.getElementById("fObraInst").value = "";
+      document.getElementById("fObraOrden").value = "freq_desc";
+      resetPageAndFilterObras();
+    }
+
+    function filtrarObras() {
+      const qComp = normalizarTexto(document.getElementById("fObraComp").value);
+      const qTit = normalizarTexto(document.getElementById("fObraTit").value);
+      const qInst = normalizarTexto(document.getElementById("fObraInst").value);
+      const orden = document.getElementById("fObraOrden").value;
+
+      listaObrasFiltradas = DB.obras.filter(o => {
+        if (qComp && !normalizarTexto(o.comp).includes(qComp)) return false;
+        if (qTit && !normalizarTexto(`${o.tit} ${o.op || ""} ${o.cat || ""}`).includes(qTit)) return false;
+        if (qInst && !normalizarTexto(o.inst || "").includes(qInst)) return false;
+        return true;
+      });
+
+      listaObrasFiltradas.sort((a, b) => {
+        if (orden === "freq_desc") return (b._freq - a._freq) || a.comp.localeCompare(b.comp);
+        if (orden === "comp_asc") return a.comp.localeCompare(b.comp) || a.tit.localeCompare(b.tit);
+        if (orden === "ano_asc") return (a.ano || 9999) - (b.ano || 9999);
+        if (orden === "ano_desc") return (b.ano || -1) - (a.ano || -1);
+        return 0;
+      });
+
+      renderizarTablaObras();
+    }
+
+    function renderizarTablaObras() {
+      const total = listaObrasFiltradas.length;
+      const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+      if (pageObras > totalPages) pageObras = totalPages;
+
+      const start = (pageObras - 1) * PAGE_SIZE;
+      const slice = listaObrasFiltradas.slice(start, start + PAGE_SIZE);
+
+      const totalInterpSeleccion = listaObrasFiltradas.reduce((acc, o) => acc + o._freq, 0);
+      document.getElementById("infoResultadosObras").innerHTML =
+        `Mostrando <strong>${total ? start + 1 : 0}–${Math.min(start + PAGE_SIZE, total)}</strong> de <strong>${total.toLocaleString("es-ES")}</strong> obras (${totalInterpSeleccion.toLocaleString("es-ES")} interpretaciones acumuladas)`;
+
+      renderizarControlesPaginacion("paginacionObras", pageObras, totalPages, nuevaPag => {
+        pageObras = nuevaPag;
+        renderizarTablaObras();
+        window.scrollTo({ top: 180, behavior: "smooth" });
+      });
+
+      const tbody = document.getElementById("tablaObrasBody");
+      tbody.innerHTML = slice.map(o => {
+        const catInfo = [o.op, o.cat, o.ano ? `(${o.ano})` : ""].filter(Boolean).join(" · ") || "—";
+        const periodo = o._primeraFecha
+          ? (o._primeraFecha === o._ultimaFecha ? formatearFecha(o._primeraFecha) : `${o._primeraFecha.slice(0,4)} – ${o._ultimaFecha.slice(0,4)}`)
+          : "—";
+        return `
+          <tr class="clickable-row" onclick="abrirObra('${o.id}')">
+            <td><span class="badge">${o.id}</span></td>
+            <td><strong>${o.comp}</strong></td>
+            <td>${o.tit}</td>
+            <td>${catInfo}</td>
+            <td style="font-size:0.82rem;color:var(--text-muted)">${o.inst || "—"}</td>
+            <td><span class="badge badge-primary">${o._freq} ${o._freq === 1 ? "vez" : "veces"}</span></td>
+            <td style="white-space:nowrap">${periodo}</td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    /* ==================== VISTA 3: INTÉRPRETES Y AGRUPACIONES ==================== */
+    function resetPageAndFilterInterpretes() {
+      pageInterpretes = 1;
+      filtrarInterpretes();
+    }
+
+    function limpiarFiltrosInterpretes() {
+      document.getElementById("fIntTipoEntidad").value = "todos";
+      document.getElementById("fIntNombre").value = "";
+      document.getElementById("fIntInst").value = "";
+      document.getElementById("fIntOrden").value = "conc_desc";
+      resetPageAndFilterInterpretes();
+    }
+
+    function filtrarInterpretes() {
+      const clase = document.getElementById("fIntTipoEntidad").value;
+      const qNom = normalizarTexto(document.getElementById("fIntNombre").value);
+      const qInst = normalizarTexto(document.getElementById("fIntInst").value);
+      const orden = document.getElementById("fIntOrden").value;
+
+      listaInterpretesFiltrados = catalogoAgentes.filter(a => {
+        if (clase !== "todos" && a.clase !== clase) return false;
+        if (qNom && !a._searchNombre.includes(qNom)) return false;
+        if (qInst && !a._searchInfo.includes(qInst)) return false;
+        return true;
+      });
+
+      listaInterpretesFiltrados.sort((a, b) => {
+        if (orden === "conc_desc") return (b.numConciertos - a.numConciertos) || a.nombre.localeCompare(b.nombre);
+        return a.nombre.localeCompare(b.nombre);
+      });
+
+      renderizarTablaInterpretes();
+    }
+
+    function renderizarTablaInterpretes() {
+      const total = listaInterpretesFiltrados.length;
+      const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+      if (pageInterpretes > totalPages) pageInterpretes = totalPages;
+
+      const start = (pageInterpretes - 1) * PAGE_SIZE;
+      const slice = listaInterpretesFiltrados.slice(start, start + PAGE_SIZE);
+
+      document.getElementById("infoResultadosInterpretes").innerHTML =
+        `Mostrando <strong>${total ? start + 1 : 0}–${Math.min(start + PAGE_SIZE, total)}</strong> de <strong>${total.toLocaleString("es-ES")}</strong> intérpretes y agrupaciones`;
+
+      renderizarControlesPaginacion("paginacionInterpretes", pageInterpretes, totalPages, nuevaPag => {
+        pageInterpretes = nuevaPag;
+        renderizarTablaInterpretes();
+        window.scrollTo({ top: 180, behavior: "smooth" });
+      });
+
+      const tbody = document.getElementById("tablaInterpretesBody");
+      tbody.innerHTML = slice.map(a => {
+        const intervalo = a.primera
+          ? (a.primera === a.ultima ? formatearFecha(a.primera) : `${a.primera.slice(0,4)} – ${a.ultima.slice(0,4)}`)
+          : "—";
+        const fnClick = a.clase === "persona" ? `abrirPersona('${a.id}')` : `abrirEnsemble('${a.id}')`;
+        return `
+          <tr class="clickable-row" onclick="${fnClick}">
+            <td><span class="badge">${a.id}</span></td>
+            <td><span class="badge">${a.etiquetaClase}</span></td>
+            <td><strong>${a.nombre}</strong></td>
+            <td>${a.info}</td>
+            <td><span class="badge badge-primary">${a.numConciertos} ${a.numConciertos === 1 ? "concierto" : "conciertos"}</span></td>
+            <td>${intervalo}</td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    /* ==================== VISTA 4: ESPACIOS HISTÓRICOS ==================== */
+    function renderizarTablaLugares() {
+      const tbody = document.getElementById("tablaLugaresBody");
+      const filas = DB.lugares.map(l => {
+        const concs = conciertosPorLugar.get(l.id) || [];
+        const anos = concs.map(c => c._year).filter(Boolean).sort((a,b) => a - b);
+        const periodo = anos.length
+          ? (anos[0] === anos[anos.length - 1] ? `${anos[0]}` : `${anos[0]}–${anos[anos.length - 1]}`)
+          : "—";
+        return { l, count: concs.length, periodo };
+      }).sort((a, b) => b.count - a.count);
+
+      tbody.innerHTML = filas.map(({ l, count, periodo }) => `
+        <tr class="clickable-row" onclick="filtrarConciertosPorLugar('${l.id}')">
+          <td><span class="badge">${l.id}</span></td>
+          <td><strong>${l.norm}</strong></td>
+          <td>${l.ref}</td>
+          <td style="font-style:italic;color:var(--text-muted)">«${l.lit || "—"}»</td>
+          <td style="white-space:nowrap"><strong>${periodo}</strong></td>
+          <td><span class="badge badge-primary">${count} conciertos</span></td>
+          <td style="font-size:0.83rem;color:var(--text-muted)">${l.obs || ""}</td>
+        </tr>
+      `).join("");
+    }
+
+    function filtrarConciertosPorLugar(idLugar) {
+      limpiarFiltrosConciertos();
+      document.getElementById("fLugar").value = idLugar;
+      cambiarTab("conciertos");
+      filtrarConciertos();
+    }
+
+    /* ==================== MODALES RELACIONALES ==================== */
+    function abrirConcierto(idConcierto) {
+      const c = mapConciertos.get(idConcierto);
+      if (!c) return;
+      const lugar = c.l ? mapLugares.get(c.l) : null;
+      const obras = obrasPorConcierto.get(c.id) || [];
+      const parts = partPorConcierto.get(c.id) || [];
+      const fuentes = fuentesPorConcierto.get(c.id) || [];
+
+      document.getElementById("modalSubtitulo").textContent = `REGISTRO DE CONCIERTO · ${c.id}`;
+      document.getElementById("modalTitulo").textContent =
+        `${formatearFecha(c.f)} · ${lugar ? lugar.norm : "Espacio sin especificar"}`;
+
+      const htmlParts = parts.length ? `
+        <table>
+          <thead>
+            <tr>
+              <th>Agente / Intérprete</th>
+              <th>Rol en el concierto (07_PARTICIPACION)</th>
+              <th>Agrupación vinculada (06_ENSEMBLES)</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${parts.map(p => `
+              <tr>
+                <td>
+                  ${p.persona
+                    ? `<span class="entity-link" onclick="abrirPersona('${p.persona.id}')">${p.persona.n}</span> <small style="color:var(--text-muted)">(${p.persona.id})</small>`
+                    : "<em>Participación colectiva de agrupación</em>"}
+                </td>
+                <td>${p.rol || "—"}</td>
+                <td>
+                  ${p.ensemble
+                    ? `<span class="entity-link" onclick="abrirEnsemble('${p.ensemble.id}')">${p.ensemble.n}</span> <small style="color:var(--text-muted)">(${p.ensemble.id})</small>`
+                    : "—"}
+                </td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      ` : `<p style="color:var(--text-muted)">No constan participaciones desglosadas para este concierto.</p>`;
+
+      const htmlObras = obras.length ? `
+        <table>
+          <thead>
+            <tr>
+              <th>Orden</th>
+              <th>Compositor</th>
+              <th>Obra interpretada (03_OBRAS)</th>
+              <th>Catálogo / Año</th>
+              <th>Instrumentación</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${obras.map(({ orden, obra }) => {
+              if (!obra) return "";
+              const cat = [obra.op, obra.cat, obra.ano ? `(${obra.ano})` : ""].filter(Boolean).join(" · ") || "—";
+              return `
+                <tr>
+                  <td><span class="badge">${orden}.º</span></td>
+                  <td>
+                    <span class="entity-link" onclick="irACompositorDesdeModal('${obra.comp.replace(/'/g, "\\'")}')">${obra.comp}</span>
+                  </td>
+                  <td>
+                    <span class="entity-link" onclick="abrirObra('${obra.id}')">${obra.tit}</span>
+                    <small style="color:var(--text-muted)">(${obra.id})</small>
+                    ${obra.obs ? `<div style="font-size:0.79rem;color:var(--text-muted);margin-top:0.2rem">${obra.obs}</div>` : ""}
+                  </td>
+                  <td>${cat}</td>
+                  <td style="font-size:0.82rem">${obra.inst || "—"}</td>
+                </tr>
+              `;
+            }).join("")}
+          </tbody>
+        </table>
+      ` : `<p style="color:var(--text-muted)">No constan obras registradas para este concierto.</p>`;
+
+      const htmlFuentes = fuentes.map(f => {
+        const pdfFile = f.doc || c.pdf;
+        const urlPdf = construirUrlPdf(pdfFile, f.pags);
+        return `
+          <div class="source-box">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem">
+              <div>
+                <strong>Tipo de fuente documental:</strong> <span class="badge badge-primary">${f.tipo || "programa"}</span>
+                · <strong>Fichero:</strong> <code>${pdfFile || "—"}</code>
+                ${f.pags ? ` · <strong>Páginas:</strong> ${f.pags}` : ""}
+                ${f.autor ? `<br><strong>Autor de las notas al programa:</strong> ${f.autor}` : ""}
+              </div>
+              ${urlPdf ? `
+                <a class="btn btn-primary" href="${urlPdf}" target="_blank" rel="noopener">
+                  📄 Abrir facsímil PDF ${f.pags ? `(págs. ${f.pags})` : ""}
+                </a>
+              ` : ""}
+            </div>
+            ${f.obs ? `<div style="margin-top:0.5rem;font-size:0.84rem"><strong>Observaciones de la fuente:</strong> ${f.obs}</div>` : ""}
+            ${f.com ? `<div style="margin-top:0.35rem;font-size:0.84rem"><strong>Comentarios:</strong> ${f.com}</div>` : ""}
+          </div>
+        `;
+      }).join("");
+
+      document.getElementById("modalBody").innerHTML = `
+        <div class="meta-grid">
+          <div class="meta-item"><span>Fecha y hora</span><strong>${formatearFecha(c.f)} ${c.h ? `· ${c.h} h` : ""}</strong></div>
+          <div class="meta-item"><span>Temporada</span><strong>${c.temp || "—"}</strong></div>
+          <div class="meta-item"><span>Año SFG / Serie</span><strong>${c.ano ? `Año ${c.ano}` : "—"}${c.serie ? ` · Serie ${c.serie}` : ""}</strong></div>
+          <div class="meta-item"><span>N.º correlativo histórico</span><strong>${c.num ? `Concierto n.º ${c.num}` : "No consta en fuente"}</strong></div>
+          <div class="meta-item" style="grid-column: span 2">
+            <span>Espacio de celebración (00_LUGARES)</span>
+            <strong>${lugar ? `<span class="entity-link" onclick="cerrarModal();filtrarConciertosPorLugar('${lugar.id}')">${lugar.norm}</span> — ${lugar.ref}` : "Sin determinar"}</strong>
+          </div>
+        </div>
+
+        ${c.obs ? `<div class="obs-box"><strong>Observaciones históricas / inferencias documentadas:</strong> ${c.obs}</div>` : ""}
+
+        <div class="modal-section">
+          <h3>Intérpretes y Agrupaciones participantes <span>${parts.length} registros</span></h3>
+          <div class="table-container">${htmlParts}</div>
+        </div>
+
+        <div class="modal-section">
+          <h3>Programa interpretado (04_OBRAS_EN_CONCIERTO) <span>${obras.length} obras</span></h3>
+          <div class="table-container">${htmlObras}</div>
+        </div>
+
+        <div class="modal-section">
+          <h3>Capa Documental y Trazabilidad (01_FUENTE)</h3>
+          ${htmlFuentes || `<div class="source-box">Fichero de referencia: <code>${c.pdf || "—"}</code></div>`}
+        </div>
+      `;
+
+      document.getElementById("modalBackdrop").classList.add("open");
+    }
+
+    function abrirObra(idObra) {
+      const o = mapObras.get(idObra);
+      if (!o) return;
+      const apariciones = conciertosPorObra.get(o.id) || [];
+
+      document.getElementById("modalSubtitulo").textContent = `FICHA DE OBRA MUSICAL · ${o.id}`;
+      document.getElementById("modalTitulo").textContent = `${o.comp}: ${o.tit}`;
+
+      const filasConciertos = apariciones.map(({ idConc, orden }) => {
+        const c = mapConciertos.get(idConc);
+        if (!c) return "";
+        const lugar = c.l ? mapLugares.get(c.l) : null;
+        const parts = partPorConcierto.get(idConc) || [];
+        const resumenInt = parts.map(p => p.ensemble ? p.ensemble.n : (p.persona ? p.persona.n : "")).filter(Boolean);
+        const unicosInt = [...new Set(resumenInt)].slice(0, 3).join(" · ");
+
+        return `
+          <tr class="clickable-row" onclick="abrirConcierto('${c.id}')">
+            <td><span class="badge badge-primary">${c.id}</span></td>
+            <td style="white-space:nowrap"><strong>${formatearFecha(c.f)}</strong></td>
+            <td>${c.temp}</td>
+            <td><span class="badge">${orden}.º en el programa</span></td>
+            <td>${lugar ? lugar.norm : "—"}</td>
+            <td>${unicosInt || "—"}</td>
+          </tr>
+        `;
+      }).join("");
+
+      document.getElementById("modalBody").innerHTML = `
+        <div class="meta-grid">
+          <div class="meta-item"><span>Compositor normalizado</span><strong>${o.comp}</strong></div>
+          <div class="meta-item"><span>Año de composición</span><strong>${o.ano || "No consta"}</strong></div>
+          <div class="meta-item"><span>Opus / Catálogo</span><strong>${[o.op, o.cat].filter(Boolean).join(" · ") || "—"}</strong></div>
+          <div class="meta-item"><span>Frecuencia en la SFG</span><strong>${apariciones.length} ${apariciones.length === 1 ? "interpretación" : "interpretaciones"}</strong></div>
+          <div class="meta-item" style="grid-column: span 2"><span>Instrumentación</span><strong>${o.inst || "—"}</strong></div>
+        </div>
+        ${o.obs ? `<div class="obs-box"><strong>Observaciones musicológicas (03_OBRAS):</strong> ${o.obs}</div>` : ""}
+        <div class="modal-section">
+          <h3>Conciertos de la Sociedad en que se interpretó esta obra <span>${apariciones.length} sesiones</span></h3>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Fecha</th>
+                  <th>Temporada</th>
+                  <th>Posición</th>
+                  <th>Espacio</th>
+                  <th>Intérpretes</th>
+                </tr>
+              </thead>
+              <tbody>${filasConciertos}</tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("modalBackdrop").classList.add("open");
+    }
+
+    function abrirPersona(idPersona) {
+      const p = mapPersonas.get(idPersona);
+      if (!p) return;
+      const intervenciones = conciertosPorPersona.get(p.id) || [];
+
+      document.getElementById("modalSubtitulo").textContent = `TRAYECTORIA DE INTÉRPRETE INDIVIDUAL · ${p.id}`;
+      document.getElementById("modalTitulo").textContent = p.n;
+
+      const filas = intervenciones.map(({ idConc, rol, idEns }) => {
+        const c = mapConciertos.get(idConc);
+        if (!c) return "";
+        const lugar = c.l ? mapLugares.get(c.l) : null;
+        const ens = idEns ? mapEnsembles.get(idEns) : null;
+        const obras = obrasPorConcierto.get(idConc) || [];
+        return `
+          <tr class="clickable-row" onclick="abrirConcierto('${c.id}')">
+            <td><span class="badge badge-primary">${c.id}</span></td>
+            <td style="white-space:nowrap"><strong>${formatearFecha(c.f)}</strong></td>
+            <td>${c.temp}</td>
+            <td>${rol || "—"}</td>
+            <td>${ens ? ens.n : "Solista / Individual"}</td>
+            <td>${lugar ? lugar.norm : "—"}</td>
+            <td>${obras.length} obras</td>
+          </tr>
+        `;
+      }).join("");
+
+      document.getElementById("modalBody").innerHTML = `
+        <div class="meta-grid">
+          <div class="meta-item"><span>Nombre normalizado</span><strong>${p.n}</strong></div>
+          <div class="meta-item"><span>Tipo de agente</span><strong>${p.tipo || "—"}</strong></div>
+          <div class="meta-item"><span>Instrumento / Función</span><strong>${p.inst || "—"}</strong></div>
+          <div class="meta-item"><span>Participaciones registradas</span><strong>${intervenciones.length}</strong></div>
+        </div>
+        ${p.obs ? `<div class="obs-box"><strong>Observaciones biográficas/documentales:</strong> ${p.obs}</div>` : ""}
+        <div class="modal-section">
+          <h3>Historial de actuaciones en la Sociedad Filarmónica de Gijón</h3>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Concierto</th>
+                  <th>Fecha</th>
+                  <th>Temporada</th>
+                  <th>Rol desempeñado</th>
+                  <th>Agrupación</th>
+                  <th>Espacio</th>
+                  <th>Programa</th>
+                </tr>
+              </thead>
+              <tbody>${filas}</tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("modalBackdrop").classList.add("open");
+    }
+
+    function abrirEnsemble(idEnsemble) {
+      const e = mapEnsembles.get(idEnsemble);
+      if (!e) return;
+      const intervenciones = conciertosPorEnsemble.get(e.id) || [];
+
+      document.getElementById("modalSubtitulo").textContent = `TRAYECTORIA DE AGRUPACIÓN (ENSEMBLE) · ${e.id}`;
+      document.getElementById("modalTitulo").textContent = e.n;
+
+      const filas = intervenciones.map(({ idConc }) => {
+        const c = mapConciertos.get(idConc);
+        if (!c) return "";
+        const lugar = c.l ? mapLugares.get(c.l) : null;
+        const obras = obrasPorConcierto.get(idConc) || [];
+        const miembros = (partPorConcierto.get(idConc) || [])
+          .filter(x => x.idEns === e.id && x.persona)
+          .map(x => `${x.persona.n}${x.rol ? ` (${x.rol})` : ""}`);
+
+        return `
+          <tr class="clickable-row" onclick="abrirConcierto('${c.id}')">
+            <td><span class="badge badge-primary">${c.id}</span></td>
+            <td style="white-space:nowrap"><strong>${formatearFecha(c.f)}</strong></td>
+            <td>${c.temp}</td>
+            <td>${lugar ? lugar.norm : "—"}</td>
+            <td style="font-size:0.82rem">${miembros.length ? miembros.join(" · ") : "Formación global"}</td>
+            <td>${obras.length} obras</td>
+          </tr>
+        `;
+      }).join("");
+
+      document.getElementById("modalBody").innerHTML = `
+        <div class="meta-grid">
+          <div class="meta-item"><span>Agrupación normalizada</span><strong>${e.n}</strong></div>
+          <div class="meta-item"><span>País de referencia</span><strong>${e.pais || "—"}</strong></div>
+          <div class="meta-item"><span>Conciertos en la SFG</span><strong>${intervenciones.length}</strong></div>
+        </div>
+        ${e.obs ? `<div class="obs-box"><strong>Observaciones:</strong> ${e.obs}</div>` : ""}
+        <div class="modal-section">
+          <h3>Conciertos interpretados por esta agrupación</h3>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Concierto</th>
+                  <th>Fecha</th>
+                  <th>Temporada</th>
+                  <th>Espacio</th>
+                  <th>Integrantes consignados en el programa</th>
+                  <th>Programa</th>
+                </tr>
+              </thead>
+              <tbody>${filas}</tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("modalBackdrop").classList.add("open");
+    }
+
+    function irACompositorDesdeModal(comp) {
+      cerrarModal();
+      cambiarTab("obras");
+      limpiarFiltrosObras();
+      document.getElementById("fObraComp").value = comp;
+      resetPageAndFilterObras();
+    }
+
+    function abrirConfigPdf() {
+      const nueva = prompt(
+        "Indica la carpeta o URL base donde se alojan los PDFs digitalizados de los programas de mano (por ejemplo: 'programas_pdf/' o '../pdfs/'):",
+        carpetaPdfs
+      );
+      if (nueva !== null) {
+        carpetaPdfs = nueva.trim();
+        localStorage.setItem("sfg_pdf_folder", carpetaPdfs);
+      }
+    }
+
+    function cerrarModal() {
+      document.getElementById("modalBackdrop").classList.remove("open");
+    }
+
+    function cerrarModalSiFondo(e) {
+      if (e.target.id === "modalBackdrop") cerrarModal();
+    }
+
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") cerrarModal();
+    });
+
+    function renderizarControlesPaginacion(containerId, current, totalPages, onPageChange) {
+      const el = document.getElementById(containerId);
+      if (totalPages <= 1) {
+        el.innerHTML = "";
+        return;
+      }
+      el.innerHTML = `
+        <button class="btn btn-outline" ${current <= 1 ? "disabled" : ""} id="${containerId}_prev">◀ Anterior</button>
+        <span style="padding:0 0.5rem;font-weight:600">Página ${current} de ${totalPages}</span>
+        <button class="btn btn-outline" ${current >= totalPages ? "disabled" : ""} id="${containerId}_next">Siguiente ▶</button>
+      `;
+      const btnPrev = document.getElementById(`${containerId}_prev`);
+      const btnNext = document.getElementById(`${containerId}_next`);
+      if (btnPrev && current > 1) btnPrev.onclick = () => onPageChange(current - 1);
+      if (btnNext && current < totalPages) btnNext.onclick = () => onPageChange(current + 1);
+    }
+
+    window.addEventListener("DOMContentLoaded", async () => {
+      if (window.SFG_DATA && !window.SFG_ENCRYPTED) {
+        document.getElementById("loginOverlay").classList.add("hidden");
+        inicializarIndices();
+        return;
+      }
+      const savedKey = sessionStorage.getItem("sfg_session_key");
+      if (savedKey) {
+        try {
+          const datos = await desencriptarArchivo(savedKey);
+          if (datos) {
+            DB = datos;
+            document.getElementById("loginOverlay").classList.add("hidden");
+            inicializarIndices();
+            return;
+          }
+        } catch (_) {}
+      }
+      document.getElementById("inputClaveWeb").focus();
+    });
+  </script>
+</body>
+</html>
