@@ -85,6 +85,23 @@
       max-width: 780px;
     }
 
+    .wip-banner {
+      margin-top: 0.95rem;
+      background: rgba(243, 217, 164, 0.14);
+      border: 1px solid rgba(243, 217, 164, 0.38);
+      border-left: 4px solid #f3d9a4;
+      padding: 0.6rem 0.95rem;
+      border-radius: 6px;
+      font-size: 0.86rem;
+      color: #fdfbf7;
+    }
+
+    .badge-drive {
+      background: #e6f4ea;
+      color: #137333;
+      border: 1px solid rgba(19, 115, 51, 0.25);
+    }
+
     .stats-bar {
       display: flex;
       flex-wrap: wrap;
@@ -749,6 +766,9 @@
           <p class="header-desc">
             Catálogo relacional con granularidad de ítem de los conciertos, obras, compositores, intérpretes, agrupaciones y espacios documentados en el fondo histórico de la Sociedad.
           </p>
+          <div class="wip-banner">
+            ℹ️ <em>Este archivo es un trabajo en curso: se completa a medida que se localizan programas de mano no conservados y se amplía con la programación de cada nueva temporada.</em>
+          </div>
         </div>
         <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
           <button class="btn btn-outline" style="background:rgba(255,255,255,0.12);color:#fff;border-color:rgba(255,255,255,0.3)" onclick="abrirConfigPdf()">
@@ -822,10 +842,13 @@
 
         <div class="filter-actions">
           <div class="quick-demos">
-            <span>Consultas de ejemplo (Apdo. 7.7 TFM):</span>
+            <span>Consultas rápidas:</span>
             <button class="btn-chip" onclick="abrirConcierto('C0001')">Inaugural (06/05/1908)</button>
-            <button class="btn-chip" onclick="abrirConcierto('C0089')">Concierto n.º 88: Arthur Rubinstein (29/02/1916)</button>
-            <button class="btn-chip" onclick="abrirConcierto('C0339')">Recital Regino Sáinz de la Maza (03/05/1938)</button>
+            <button class="btn-chip" onclick="abrirConcierto('C0089')">Arthur Rubinstein (29/02/1916)</button>
+            <button class="btn-chip" onclick="abrirConcierto('C0339')">Regino Sáinz de la Maza (03/05/1938)</button>
+            <button class="btn-chip" id="btnFiltroDrive" onclick="alternarFiltroConEnlaceDrive()" style="border-color:#137333;color:#137333;font-weight:600">
+              📄 Con programa en Drive (8)
+            </button>
           </div>
           <button class="btn btn-outline" onclick="limpiarFiltrosConciertos()">Limpiar filtros</button>
         </div>
@@ -999,7 +1022,12 @@
   </div>
 
   <footer>
-    Archivo Histórico Digital de la Sociedad Filarmónica de Gijón · Modelo relacional de granularidad de ítem (TFM Aida Suárez Fernández, 2026)
+    <div style="margin-bottom:0.35rem;color:var(--text);font-style:italic">
+      Este archivo es un trabajo en curso: se completa a medida que se localizan programas de mano no conservados y se amplía con la programación de cada nueva temporada.
+    </div>
+    <div>
+      Archivo Histórico Digital de la Sociedad Filarmónica de Gijón · Modelo relacional de granularidad de ítem (TFM Aida Suárez Fernández, 2026)
+    </div>
   </footer>
 
   <!-- Carga directa de datos generados por migracion_sfg.py (Funciona en local sin servidor y en GitHub Pages) -->
@@ -1313,7 +1341,10 @@
 
         const obrasList = obrasPorConcierto.get(c.id) || [];
         const partList = partPorConcierto.get(c.id) || [];
+        const fuentesList = fuentesPorConcierto.get(c.id) || [];
         const lugarObj = c.l ? mapLugares.get(c.l) : null;
+        const fuenteConUrl = fuentesList.find(f => f.url && String(f.url).trim());
+        c._driveUrl = fuenteConUrl ? String(fuenteConUrl.url).trim() : null;
 
         const strObras = obrasList.map(x => x.obra ? `${x.obra.comp} ${x.obra.tit}` : "").join(" ");
         const strComps = obrasList.map(x => x.obra ? x.obra.comp : "").join(" | ");
@@ -1390,6 +1421,11 @@
 
     function poblarControlesCabeceraYFiltros() {
       const compositoresUnicos = [...new Set(DB.obras.map(o => o.comp).filter(Boolean))].sort();
+      const totalEnlacesDrive = DB.fuentes.filter(f => f.url && String(f.url).trim()).length;
+      const btnDrive = document.getElementById("btnFiltroDrive");
+      if (btnDrive) {
+        btnDrive.textContent = `📄 Ver conciertos con programa en Drive (${totalEnlacesDrive})`;
+      }
       document.getElementById("headerStats").innerHTML = `
         <div class="stat-pill"><strong>${DB.conciertos.length.toLocaleString("es-ES")}</strong> conciertos</div>
         <div class="stat-pill"><strong>${DB.obras_conc.length.toLocaleString("es-ES")}</strong> interpretaciones</div>
@@ -1445,6 +1481,18 @@
     }
 
     /* ==================== VISTA 1: CONCIERTOS ==================== */
+    let soloConEnlaceDrive = false;
+
+    function alternarFiltroConEnlaceDrive() {
+      soloConEnlaceDrive = !soloConEnlaceDrive;
+      const btn = document.getElementById("btnFiltroDrive");
+      if (btn) {
+        btn.style.background = soloConEnlaceDrive ? "#137333" : "";
+        btn.style.color = soloConEnlaceDrive ? "#fff" : "#137333";
+      }
+      resetPageAndFilterConciertos();
+    }
+
     function resetPageAndFilterConciertos() {
       pageConciertos = 1;
       filtrarConciertos();
@@ -1458,6 +1506,12 @@
       document.getElementById("fLugar").value = "";
       document.getElementById("fCompositor").value = "";
       document.getElementById("fInterprete").value = "";
+      soloConEnlaceDrive = false;
+      const btn = document.getElementById("btnFiltroDrive");
+      if (btn) {
+        btn.style.background = "";
+        btn.style.color = "#137333";
+      }
       resetPageAndFilterConciertos();
     }
 
@@ -1471,6 +1525,7 @@
       const qInt = normalizarTexto(document.getElementById("fInterprete").value);
 
       listaConciertosFiltrados = DB.conciertos.filter(c => {
+        if (soloConEnlaceDrive && !c._driveUrl) return false;
         if (qTemp && c.temp !== qTemp) return false;
         if (qLugar && c.l !== qLugar) return false;
         if (anoMin && (!c._year || c._year < anoMin)) return false;
@@ -1537,6 +1592,7 @@
                 ${formatearFecha(c.f)} ${c.h ? `· ${c.h} h` : ""}
               </div>
               <div class="badges-row">
+                ${c._driveUrl ? `<a class="badge badge-drive" href="${c._driveUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Abrir programa de mano en Google Drive">📄 Programa PDF (Drive) ↗</a>` : ""}
                 <span class="badge badge-primary">${c.id}</span>
                 ${c.num ? `<span class="badge">Concierto n.º ${c.num}</span>` : ""}
                 <span class="badge">Temporada ${c.temp}</span>
@@ -1821,7 +1877,8 @@
 
       const htmlFuentes = fuentes.map(f => {
         const pdfFile = f.doc || c.pdf;
-        const urlPdf = construirUrlPdf(pdfFile, f.pags);
+        const enlaceDrive = f.url ? String(f.url).trim() : "";
+        const urlPdfLocal = construirUrlPdf(pdfFile, f.pags);
         return `
           <div class="source-box">
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem">
@@ -1830,12 +1887,19 @@
                 · <strong>Fichero:</strong> <code>${pdfFile || "—"}</code>
                 ${f.pags ? ` · <strong>Páginas:</strong> ${f.pags}` : ""}
                 ${f.autor ? `<br><strong>Autor de las notas al programa:</strong> ${f.autor}` : ""}
+                ${enlaceDrive ? `<br><strong>Enlace al programa (Drive):</strong> <a href="${enlaceDrive}" target="_blank" rel="noopener" style="color:var(--primary);word-break:break-all">${enlaceDrive}</a>` : ""}
               </div>
-              ${urlPdf ? `
-                <a class="btn btn-primary" href="${urlPdf}" target="_blank" rel="noopener">
-                  📄 Abrir facsímil PDF ${f.pags ? `(págs. ${f.pags})` : ""}
-                </a>
-              ` : ""}
+              <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+                ${enlaceDrive ? `
+                  <a class="btn btn-primary" href="${enlaceDrive}" target="_blank" rel="noopener">
+                    📄 Ver programa de mano (Drive) ${f.pags ? `· págs. ${f.pags}` : ""} ↗
+                  </a>
+                ` : (urlPdfLocal ? `
+                  <a class="btn btn-outline" href="${urlPdfLocal}" target="_blank" rel="noopener">
+                    📁 Abrir PDF en carpeta local ${f.pags ? `(págs. ${f.pags})` : ""}
+                  </a>
+                ` : "")}
+              </div>
             </div>
             ${f.obs ? `<div style="margin-top:0.5rem;font-size:0.84rem"><strong>Observaciones de la fuente:</strong> ${f.obs}</div>` : ""}
             ${f.com ? `<div style="margin-top:0.35rem;font-size:0.84rem"><strong>Comentarios:</strong> ${f.com}</div>` : ""}
